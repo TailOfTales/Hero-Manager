@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Skill
 {
@@ -21,35 +23,6 @@ public class Skill
         this.phase = phase;
         this.statModifiers = statModifiers;
     }
-
-    public ushort getId()
-    {
-        return id;
-    }
-    public string getName()
-    {
-        return name;
-    }
-    public string getDescription()
-    {
-        return description;
-    }
-    public bool getIsActive()
-    {
-        return isActive;
-    }
-    public bool getIsAura()
-    {
-        return isAura;
-    }
-    public byte getPhase()
-    {
-        return phase;
-    }
-    public List<StatModifier> getStatModifiers()
-    {
-        return statModifiers;
-    }
 }
 
 public class StatModifier
@@ -62,45 +35,30 @@ public class StatModifier
         this.statAffected = statAffected;
         this.amount = amount;
     }
-
-    public string getStatAffected()
-    {
-        return statAffected;
-    }
-
-    public float getAmount()
-    {
-        return amount;
-    }
-
 }
+
 
 public class SkillDatabase
 {
-    public List<Skill> skills;
-    private static SkillDatabase instance;
+    public List<Skill> skills { get; set; }
 
-    private SkillDatabase()
+    public SkillDatabase()
     {
-        skills = new List<Skill>();
-        List<StatModifier> temp = new List<StatModifier>();
+
+        skills = JsonConvert.DeserializeObject<List<Skill>>(Resources.Load<TextAsset>("SkillDatabase").text);
+        Debug.Log(skills[0].statModifiers[0].statAffected);
+        Debug.Log(skills[1].statModifiers[0].statAffected);
+        if (skills == null)
+            skills = new List<Skill>();
+
+        /*List<StatModifier> temp = new List<StatModifier>();
         temp.Add(new StatModifier(Hero.DEFENCE, 10.0f));
         temp.Add(new StatModifier(Hero.DAMAGE, -5.0f));
-        skills.Add(new Skill(1, "Aura of battle", "Rises defence and attcak", false, true, 0, temp));
-        temp.Clear();
-        temp.Add(new StatModifier(Hero.HP, 5.0f));
-        skills.Add(new Skill(2, "Heal time", "Heals your hero", false, false, 0, temp));
-    }
+        skills.Add(new Skill(1, "Aura of battle", "Rises defence and damage", false, true, 0, temp));*/
+        //temp.Clear();
+        //temp.Add(new StatModifier(Hero.HP, 5.0f));
+        //skills.Add(new Skill(2, "Heal time", "Heals your hero", false, false, 0, temp));
 
-    public static SkillDatabase Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new SkillDatabase();
-            }
-            return instance;
-        }
+        //НУЖНО РАЗРАБОТАТЬ ПАРСЕР И ФОРМАТ СТРОКИ ДЛЯ СЧИТЫВАНИЯ БД С ФАЙЛА.
     }
 }

@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class Hero
 {
+    public const string HP = "HP";
+    public const string DAMAGE = "DAMAGE";
+    public const string DEFENCE = "DEFENCE";
+    public const string MOTIVATION = "MOTIVATION";
+    public const string KINDNESS = "KINDNESS";
+    public const string INDEPENDENCE = "INDEPENDENCE";
+    public const string LEADERSHIP = "LEADERSHIP";
+    public const string MAGIC = "MAGIC";
+    public const string PHYSIC = "PHYSIC";
+    public const string PACIFIC = "PACIFIC";
+
     public ushort id;
     public string name;
     public bool sex;
@@ -14,59 +25,8 @@ public class Hero
     public Item[] items;   //четыре
     public Sprite[] sprite;
 
-    public List<StatModifier> getEffects()
-    {
-        return effects;
-    }
-
-    public void setEffect(List<StatModifier> effects)
-    {
-        effects.AddRange(effects);
-    }
-
-    public ushort getId()
-    {
-        return id;
-    }
-
-    public string getName()
-    {
-        return name;
-    }
-
-    public bool getSex()
-    {
-        return sex;
-    }
-
-    public string getBiography()
-    {
-        return biography;
-    }
-
-    public List<Skill> getSkills()
-    {
-        return skills;
-    }
-
     public Dictionary<string, float> baseStats;
     public Dictionary<string, float> trueStats;
-
-    public Dictionary<string, float> getTrueStats()
-    {
-        return trueStats;
-    }
-
-    public const string HP = "hp";
-    public const string DAMAGE = "damage";
-    public const string DEFENCE = "defence";
-    public const string MOTIVATION = "motivation";
-    public const string KINDNESS = "kindness";
-    public const string INDEPENDENCE = "independence";
-    public const string LEADERSHIP = "leadership";
-    public const string MAGIC = "magic";
-    public const string PHYSIC = "physic";
-    public const string PACIFIC = "pacific";
 
     public Hero()
     {
@@ -96,7 +56,7 @@ public class Hero
 
     public void learnSkill(Skill skill)
     {
-        skills.Add(skill);
+        this.skills.Add(skill);
     }
 
     public void calculateStats ()
@@ -104,7 +64,20 @@ public class Hero
         trueStats = new Dictionary<string, float>(baseStats);
         foreach (StatModifier stat in effects)
         {
-            trueStats[stat.getStatAffected()] += stat.getAmount();
+            trueStats[stat.statAffected] += stat.amount;
+            Debug.Log(name + " " + stat.statAffected + " " + stat.amount + " affected");
         }
+    }
+
+    public void setEffect(List<StatModifier> effects)
+    {
+        this.effects.AddRange(effects);
+    }
+
+    public string toString()
+    {
+        return "\"" + name + "\"" + " HP = " + trueStats[Hero.HP] +
+            "; DEFENCE = " + trueStats[Hero.DEFENCE] +
+            "; DAMAGE = " + trueStats[Hero.DAMAGE];
     }
 }

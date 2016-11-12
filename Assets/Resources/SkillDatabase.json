@@ -1,0 +1,2 @@
+﻿[{"id":1,"name":"Мальфит","description":"Объевшись камней, герой научился превращять свою кожу в камень. Увеличивает защиту, но понижает урон.","isActive":false,"isAura":false,"phase":0,"statModifiers":[{"statAffected":"DEFENCE","amount":10.0},{"statAffected":"DAMAGE","amount":-5.0}]},
+{"id":2,"name":"Аура Духа","description":"Увеличивает Здоровье всех членов группы.","isActive":false,"isAura":true,"phase":0,"statModifiers":[{"statAffected":"HP","amount":15.0}]}]

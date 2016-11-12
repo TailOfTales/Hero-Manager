@@ -7,6 +7,7 @@ public class Player
     public uint playTime;
     public List<Perk> perks;
     public List<Hero> heroes;
+    public Hero[] leaders;
     public List<Item> inventory;
 
     public Player ()
@@ -16,12 +17,8 @@ public class Player
         playTime = 0;
         perks = new List<Perk>();
         heroes = new List<Hero>();
+        leaders = new Hero[8];
         inventory = new List<Item>();
-    }
-
-    public List<Hero> getHeroes()
-    {
-        return heroes;
     }
 
     public void recruitHero(Hero hero)

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GlobalController : MonoBehaviour {
 
@@ -8,46 +7,52 @@ public class GlobalController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         player = new Player();
+        SkillDatabase skillDatabase = new SkillDatabase();
+
         player.recruitHero(new Hero());
         player.recruitHero(new Hero());
-        player.getHeroes()[0].learnSkill(SkillDatabase.Instance.skills[0]);
-        player.getHeroes()[1].learnSkill(SkillDatabase.Instance.skills[1]);
-        Debug.Log("Jonathan true def = " + player.getHeroes()[0].getTrueStats()[Hero.DEFENCE]);
+
+        player.heroes[0].name = "Hero One";
+        player.heroes[1].name = "Hero Two";
+
+        player.heroes[0].learnSkill(skillDatabase.skills[0]);
+        player.heroes[1].learnSkill(skillDatabase.skills[1]);
+
+        Debug.Log(player.heroes[0].toString());
+        Debug.Log(player.heroes[1].toString());
+
         int phase = 0;
         if (phase == 0)
         {
-            foreach (Hero hero in player.getHeroes())
+            for (int i = 0; i < player.heroes.Count; i++)
             {
-                foreach (Skill skill in hero.getSkills())
+                for (int j = 0; j < player.heroes[i].skills.Count; j++)
                 {
-                    if (!skill.getIsActive() && skill.getPhase()==phase)
+                    if (!player.heroes[i].skills[j].isActive && player.heroes[i].skills[j].phase==phase)
                     {
-                        if (skill.getIsAura())
+                        if (player.heroes[i].skills[j].isAura)
                         {
-                            foreach (Hero partyMember in player.getHeroes())
+                            Debug.Log(player.heroes[i].name + " has an aura, called: " + player.heroes[i].skills[j].name);
+                            for (int k = 0; k < player.heroes.Count; k++)
                             {
-                                partyMember.setEffect(skill.getStatModifiers());
+                                player.heroes[k].setEffect(player.heroes[i].skills[j].statModifiers);
                             }
                         }
                         else
                         {
-                            hero.setEffect(skill.getStatModifiers());
+                            Debug.Log(player.heroes[i].name + " has an passive skill, called: " + player.heroes[i].skills[j].name);
+                            player.heroes[i].setEffect(player.heroes[i].skills[j].statModifiers);
                         }
                     }
                 }
             }
-            foreach (Hero hero in player.getHeroes())
+            foreach (Hero hero in player.heroes)
             {
                 hero.calculateStats();
             }
         }
 
-        Debug.Log("\nJonathan FINAL def = " + player.getHeroes()[0].getTrueStats()[Hero.DEFENCE]);
-        Debug.Log("\nJoseph FINAL def = " + player.getHeroes()[1].getTrueStats()[Hero.DEFENCE]);
+        Debug.Log(player.heroes[0].toString());
+        Debug.Log(player.heroes[1].toString());
     }
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
