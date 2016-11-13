@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
 
 public class Player
 {
@@ -19,10 +22,25 @@ public class Player
         heroes = new List<Hero>();
         leaders = new Hero[8];
         inventory = new List<Item>();
+
+        heroes = JsonConvert.DeserializeObject<List<Hero>>(Resources
+            .Load<TextAsset>("SavedHeroes").text);
     }
 
     public void recruitHero(Hero hero)
     {
-        heroes.Add(hero);
+        heroes.Add(hero);  //ПОКЕМОН!!111!!
+    }
+
+    public void saveHeroes()
+    {
+        if (!Directory.Exists(Application.persistentDataPath + "/saveSlot1"))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + "/saveSlot1");
+        }
+        File.WriteAllText(Application.persistentDataPath + "/saveSlot1/SavedHeroes.json"
+            , JsonConvert.SerializeObject(heroes));
+
+            
     }
 }

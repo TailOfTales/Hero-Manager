@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Newtonsoft.Json;
+using UnityEngine;
 
 public class GlobalController : MonoBehaviour {
 
@@ -9,17 +10,7 @@ public class GlobalController : MonoBehaviour {
         player = new Player();
         SkillDatabase skillDatabase = new SkillDatabase();
 
-        player.recruitHero(new Hero());
-        player.recruitHero(new Hero());
-
-        player.heroes[0].name = "Hero One";
-        player.heroes[1].name = "Hero Two";
-
-        player.heroes[0].learnSkill(skillDatabase.skills[0]);
-        player.heroes[1].learnSkill(skillDatabase.skills[1]);
-
         Debug.Log(player.heroes[0].toString());
-        Debug.Log(player.heroes[1].toString());
 
         int phase = 0;
         if (phase == 0)
@@ -52,7 +43,8 @@ public class GlobalController : MonoBehaviour {
             }
         }
 
+        player.saveHeroes();
+
         Debug.Log(player.heroes[0].toString());
-        Debug.Log(player.heroes[1].toString());
     }
 }

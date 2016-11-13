@@ -45,20 +45,9 @@ public class SkillDatabase
     public SkillDatabase()
     {
 
-        skills = JsonConvert.DeserializeObject<List<Skill>>(Resources.Load<TextAsset>("SkillDatabase").text);
-        Debug.Log(skills[0].statModifiers[0].statAffected);
-        Debug.Log(skills[1].statModifiers[0].statAffected);
+        skills = JsonConvert.DeserializeObject<List<Skill>>(Resources
+            .Load<TextAsset>("SkillDatabase").text);
         if (skills == null)
             skills = new List<Skill>();
-
-        /*List<StatModifier> temp = new List<StatModifier>();
-        temp.Add(new StatModifier(Hero.DEFENCE, 10.0f));
-        temp.Add(new StatModifier(Hero.DAMAGE, -5.0f));
-        skills.Add(new Skill(1, "Aura of battle", "Rises defence and damage", false, true, 0, temp));*/
-        //temp.Clear();
-        //temp.Add(new StatModifier(Hero.HP, 5.0f));
-        //skills.Add(new Skill(2, "Heal time", "Heals your hero", false, false, 0, temp));
-
-        //НУЖНО РАЗРАБОТАТЬ ПАРСЕР И ФОРМАТ СТРОКИ ДЛЯ СЧИТЫВАНИЯ БД С ФАЙЛА.
     }
 }

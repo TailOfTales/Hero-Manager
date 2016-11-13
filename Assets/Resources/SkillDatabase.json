@@ -1,2 +1,6 @@
-﻿[{"id":1,"name":"Мальфит","description":"Объевшись камней, герой научился превращять свою кожу в камень. Увеличивает защиту, но понижает урон.","isActive":false,"isAura":false,"phase":0,"statModifiers":[{"statAffected":"DEFENCE","amount":10.0},{"statAffected":"DAMAGE","amount":-5.0}]},
-{"id":2,"name":"Аура Духа","description":"Увеличивает Здоровье всех членов группы.","isActive":false,"isAura":true,"phase":0,"statModifiers":[{"statAffected":"HP","amount":15.0}]}]
+﻿[{"id":1,"name":"Дыхание хамона","description":"Овладев техникой хамона герой получает бонус к атаке.","isActive":false,"isAura":false,"phase":0,"statModifiers":[{"statAffected":"DAMAGE","amount":10.0}]},
+{"id":2,"name":"Аура хамона","description":"Увеличивает Здоровье всех членов группы.","isActive":false,"isAura":true,"phase":0,"statModifiers":[{"statAffected":"MAX_HP","amount":15.0},{"statAffected":"CURRENT_HP","amount":15.0}]},
+{"id":3,"name":"Star platinum","description":"Значительно повышает рефлексы владельца, тем самым поднимая ему защиту.","isActive":false,"isAura":false,"phase":0,"statModifiers":[{"statAffected":"DEFENCE","amount":10.0}]},
+{"id":4,"name":"Пафос","description":"Сам себе царь.","isActive":false,"isAura":false,"phase":0,"statModifiers":[{"statAffected":"INDEPENDENCE","amount":20.0}]},
+{"id":5,"name":"Лента Мёбиуса","description":"Крайняя живучесть за счет использования стэнда Stone free.","isActive":false,"isAura":false,"phase":0,"statModifiers":[{"statAffected":"MAX_HP","amount":40.0},{"statAffected":"CURRENT_HP","amount":40.0}]},
+{"id":6,"name":"Командный дух","description":"Поднимает мораль команды.","isActive":false,"isAura":true,"phase":0,"statModifiers":[{"statAffected":"MOTIVATION","amount":10.0}]}]

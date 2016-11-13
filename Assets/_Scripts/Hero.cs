@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Hero
 {
-    public const string HP = "HP";
+    public const string MAX_HP = "MAX_HP";
+    public const string CURRENT_HP = "CURRENT_HP";
     public const string DAMAGE = "DAMAGE";
     public const string DEFENCE = "DEFENCE";
     public const string MOTIVATION = "MOTIVATION";
@@ -28,28 +29,35 @@ public class Hero
     public Dictionary<string, float> baseStats;
     public Dictionary<string, float> trueStats;
 
-    public Hero()
+    public Hero(ushort id)
     {
-        id = 0;
-        name = "JoJo";
-        sex = true;
-        biography = "Жил был, никого не трогал. Как вдруг ДИО.";
+        this.id = id;
+        name = "JoJo" + Random.Range(1, 20);
+        int Lala = Random.Range(0, 6);
+        if (Lala%2 == 1)
+        {
+            sex = true;
+        } else
+        {
+            sex = false;
+        }
+        biography = Random.Range(0,100).ToString();
 
         skills = new List<Skill>();
         effects = new List<StatModifier>();
 
-
         baseStats = new Dictionary<string, float>();
-        baseStats.Add(HP, 100.0f);
-        baseStats.Add(DAMAGE, 5.0f);
-        baseStats.Add(DEFENCE, 10.0f);
-        baseStats.Add(MOTIVATION, 20.0f);
-        baseStats.Add(KINDNESS, -20.0f);
-        baseStats.Add(INDEPENDENCE, 2.0f);
-        baseStats.Add(LEADERSHIP, 4.0f);
-        baseStats.Add(MAGIC, 50.0f);
-        baseStats.Add(PHYSIC, 20.0f);
-        baseStats.Add(PACIFIC, 34.0f);
+        baseStats.Add(MAX_HP, Random.Range(90, 110));
+        baseStats.Add(CURRENT_HP, Random.Range(90, 110));
+        baseStats.Add(DAMAGE, Random.Range(5, 15));
+        baseStats.Add(DEFENCE, Random.Range(10, 20));
+        baseStats.Add(MOTIVATION, Random.Range(10, 50));
+        baseStats.Add(KINDNESS, Random.Range(-100, 100));
+        baseStats.Add(INDEPENDENCE, Random.Range(0, 50));
+        baseStats.Add(LEADERSHIP, Random.Range(1, 5));
+        baseStats.Add(MAGIC, Random.Range(0, 100));
+        baseStats.Add(PHYSIC, Random.Range(0, 100));
+        baseStats.Add(PACIFIC, Random.Range(0, 100));
 
         trueStats = new Dictionary<string, float>(baseStats);
     }
@@ -65,7 +73,6 @@ public class Hero
         foreach (StatModifier stat in effects)
         {
             trueStats[stat.statAffected] += stat.amount;
-            Debug.Log(name + " " + stat.statAffected + " " + stat.amount + " affected");
         }
     }
 
@@ -76,8 +83,18 @@ public class Hero
 
     public string toString()
     {
-        return "\"" + name + "\"" + " HP = " + trueStats[Hero.HP] +
-            "; DEFENCE = " + trueStats[Hero.DEFENCE] +
-            "; DAMAGE = " + trueStats[Hero.DAMAGE];
+        return "\"" + name + "\"" + " Характеристики" 
+            + "\nHP = " + trueStats[Hero.CURRENT_HP] + "/" + trueStats[Hero.MAX_HP]
+            + "\nDEFENCE = " + trueStats[Hero.DEFENCE]
+            + "\nDAMAGE = " + trueStats[Hero.DAMAGE]
+            + "\nMOTIVATION = " + trueStats[Hero.MOTIVATION]
+            + "\nKINDNESS = " + trueStats[Hero.KINDNESS]
+            + "\nINDEPENDENCE = " + trueStats[Hero.INDEPENDENCE]
+            + "\nLEADERSHIP = " + trueStats[Hero.LEADERSHIP]
+            + "\nMAGIC = " + trueStats[Hero.MAGIC]
+            + "\nPHYSIC = " + trueStats[Hero.PHYSIC]
+            + "\nPACIFIC = " + trueStats[Hero.PACIFIC];
     }
+
+
 }
